@@ -1,0 +1,286 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Resume</title>
+
+    <style>
+        body {
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            max-width: 900px;
+            margin: 30px auto;
+            padding: 20px;
+            line-height: 1.5;
+            color: #333;
+        }
+
+        h1 {
+            text-align: center;
+            color: brown;
+        }
+
+        h2 {
+            color: brown;
+            border-bottom: 2px solid brown;
+            padding-bottom: 5px;
+        }
+
+        .info {
+            text-align: center;
+            color: blue;
+            overflow-wrap: anywhere;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        th, td {
+            border: 1px solid gray;
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #eee;
+            color: brown;
+        }
+
+        .item {
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- PERSONAL INFORMATION -->
+    <div id="personalInfo"></div>
+
+    <!-- PROFESSIONAL SUMMARY -->
+    <h2>PROFESSIONAL SUMMARY</h2>
+
+    <p>
+        Motivated MCA student with a strong foundation in full-stack
+        web development. Interested in building applications using
+        Java, Spring Boot, React.js, Node.js and MySQL.
+        Eager to learn new technologies and develop real-world projects.
+    </p>
+
+    <!-- EDUCATION -->
+    <h2>EDUCATION</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>S.No</th>
+                <th>Degree</th>
+                <th>College / School</th>
+                <th>Location</th>
+            </tr>
+        </thead>
+        <tbody id="educationTable"></tbody>
+    </table>
+
+    <!-- TECHNICAL SKILLS -->
+    <h2>TECHNICAL SKILLS</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>S.No</th>
+                <th>Skill Name</th>
+                <th>Category</th>
+            </tr>
+        </thead>
+        <tbody id="skillsTable"></tbody>
+    </table>
+
+    <!-- PROJECTS -->
+    <h2>PROJECTS</h2>
+
+    <div id="projectsList"></div>
+
+    <!-- DECLARATION -->
+    <h2>DECLARATION</h2>
+
+    <p>
+        I hereby declare that the information provided is true
+        to the best of my knowledge.
+    </p>
+
+    <script>
+
+        // 1. PERSONAL INFORMATION OBJECT
+
+        const personalInfo = {
+            name: "Lakshmi Narayanan S A",
+            email: "narank808@gmail.com",
+            phone: "6381548506",
+            linkedin: "Lakshmi-narayanan-s-a-95643a261",
+            github: "Lakshminarayanan7525"
+        };
+
+        document.getElementById("personalInfo").innerHTML = `
+            <h1>${personalInfo.name}</h1>
+
+            <p class="info">
+                Email: ${personalInfo.email} |
+                Phone: ${personalInfo.phone}
+            </p>
+
+            <p class="info">
+                LinkedIn: ${personalInfo.linkedin} |
+                GitHub: ${personalInfo.github}
+            </p>
+        `;
+
+
+        // 2. EDUCATION ARRAY
+
+        const education = [
+            {
+                degree: "Master of Computer Applications",
+                college: "S.A. Engineering College",
+                location: "Chennai, Tamil Nadu"
+            },
+            {
+                degree: "Bachelor of Computer Applications",
+                college: "DRBCCC Hindu College",
+                location: "Pattabiram, Tamil Nadu"
+            },
+            {
+                degree: "Higher Secondary School",
+                college: "Kalaimagal Matriculation Higher Secondary School",
+                location: "Pattabiram, Chennai"
+            }
+        ];
+
+        // MAP: Create education rows
+
+        const educationRows = education.map((item, index) => {
+            return `
+                <tr>
+                    <td>${index + 1}</td>
+                    <td>${item.degree}</td>
+                    <td>${item.college}</td>
+                    <td>${item.location}</td>
+                </tr>
+            `;
+        });
+
+        // JOIN: Display education rows
+
+        document.getElementById("educationTable").innerHTML =
+            educationRows.join("");
+
+
+        // 3. TECHNICAL SKILLS ARRAY
+
+        const skills = [
+            { name: "Java", category: "Programming" },
+            { name: "JavaScript", category: "Programming" },
+
+            { name: "HTML", category: "Frontend" },
+            { name: "CSS", category: "Frontend" },
+            { name: "React.js", category: "Frontend" },
+
+            { name: "Spring Boot", category: "Backend" },
+            { name: "Node.js", category: "Backend" },
+
+            { name: "MySQL", category: "Database" },
+            { name: "MongoDB", category: "Database" },
+
+            { name: "VS Code", category: "Tools" },
+            { name: "IntelliJ IDEA", category: "Tools" },
+            { name: "Postman", category: "Tools" },
+            { name: "MySQL Workbench", category: "Tools" }
+        ];
+
+        // FILTER: Select skills from all categories
+
+        const filteredSkills = skills.filter((skill) => {
+            return skill.category === "Programming" ||
+                   skill.category === "Frontend" ||
+                   skill.category === "Backend" ||
+                   skill.category === "Database" ||
+                   skill.category === "Tools";
+        });
+
+        // MAP: Create skills table rows
+
+        const skillsRows = filteredSkills.map((skill, index) => {
+            return `
+                <tr>
+                    <td>${index + 1}</td>
+                    <td>${skill.name}</td>
+                    <td>${skill.category}</td>
+                </tr>
+            `;
+        });
+
+        // JOIN: Display skills
+
+        document.getElementById("skillsTable").innerHTML =
+            skillsRows.join("");
+
+
+        // 4. PROJECTS ARRAY
+
+        const projects = [
+            {
+                name: "Product Inventory System",
+                technologies: "React.js, Spring Boot, MySQL",
+                description: "Developed a full-stack inventory system with CRUD functionality.",
+                details: "Built REST APIs and managed product data using MySQL."
+            },
+            {
+                name: "Expense Tracker",
+                technologies: "React.js, Node.js, MySQL",
+                description: "Developed an expense tracking application with CRUD functionality.",
+                details: "Implemented charts and analytics to visualize spending patterns."
+            }
+        ];
+
+        // MAP: Create project details
+
+        const projectsHTML = projects.map((project, index) => {
+            return `
+                <div class="item">
+                    <h3>${index + 1}. ${project.name}</h3>
+
+                    <p>
+                        <b>Technologies:</b> ${project.technologies}
+                    </p>
+
+                    <p>${project.description}</p>
+
+                    <p>${project.details}</p>
+                </div>
+            `;
+        });
+
+        // JOIN: Display projects
+
+        document.getElementById("projectsList").innerHTML =
+            projectsHTML.join("");
+
+
+        // 5. FINDINDEX: Find Spring Boot position
+
+        const skillIndex = skills.findIndex((skill) => {
+            return skill.name === "Spring Boot";
+        });
+
+        console.log("Spring Boot index:", skillIndex);
+
+    </script>
+
+</body>
+
+</html>
